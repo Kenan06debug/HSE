@@ -1,0 +1,40 @@
+﻿{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Student Enrollment Form</h5>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('enroll') }}">
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="full_name" class="form-control" placeholder="e.g. Adeola Johnson" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" name="email" class="form-control" placeholder="name@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" name="phone" class="form-control" placeholder="08012345678" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Select Course</label>
+                        <select name="course_id" class="form-select" required>
+                            <option value="">-- Choose a Course --</option>
+                            {% for course in courses %}
+                                <option value="{{ course['id'] }}" {% if selected_course_id|string == course['id']|string %}selected{% endif %}>
+                                    {{ course['title'] }} ({{ course['duration'] }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+﻿{% extends 'base.html' %}
+{% block content %}
+<div class="p-4 mb-4 bg-white rounded-3 shadow-sm border">
+    <div class="container-fluid py-2">
+        <h2 class="display-6 fw-bold">Professional IT Certification Courses</h2>
+        <p class="col-md-8 fs-6 text-muted">Explore industry-standard certifications offered across HiiT branches. Select a course below to register online.</p>
+    </div>
+</div>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for course in courses %}
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+                <span class="badge bg-secondary mb-2">{{ course['category'] }}</span>
+                <h5 class="card-title fw-bold">{{ course['title'] }}</h5>
+                <p class="card-text text-muted mb-1"><strong>Duration:</strong> {{ course['duration'] }}</p>
+                <p class="card-text text-muted"><strong>Fee:</strong> {{ course['fee'] }}</p>
+            </div>
+            <div class="card-footer bg-transparent border-0 pb-3">
+                <a href="{{ url_for('enroll', course_id=course['id']) }}" class="btn btn-primary w-100">Enroll in Course</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
